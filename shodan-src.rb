@@ -15,13 +15,16 @@ def main
 █▄─▄▄▀█▄─▄▄─█─▄▄▄▄█▄─▄▄─██▀▄─██▄─▄▄▀█─▄▄▄─█─█─█
 ██─▄─▄██─▄█▀█▄▄▄▄─██─▄█▀██─▀─███─▄─▄█─███▀█─▄─█
 ▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀▄▀▄▀         -By Lojacops
-
+"""
+help = """
 1) search results with only ip addresses
 2) search results with infos (max 10)
 3) get host infos by address 
 4) show the api key
-5) exit
-    """
+5) help (this)
+6) exit
+"""
+print help
     begin
         prompt = "\rOption:"
         while (option = gets.chomp)
@@ -57,13 +60,15 @@ def main
 
                     output = user.host("#{inputtt}")
                     print output.to_s
+                    puts "\n"
                 }.join
             end
             if option == "4"
                 puts "\rHere the API key:\n"
                 puts "#{key}\n"
-            end
-            if option == "5"
+            elsif option == "5"
+                print help
+            elsif option == "6"
                 puts "[+] Thanks for using!\n"
                 break
             end
