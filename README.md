@@ -14,6 +14,7 @@ Here the commands:
 2) search results with infos (max 10)
 3) get host infos by address 
 4) show the api key
-5) exit
+5) help (this)
+6) exit
 ```
 Yes, I also gave you my API key :D
