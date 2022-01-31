@@ -23,7 +23,8 @@ print help
     begin
         prompt = "\rOption:"
         while (option = gets.chomp)
-            if option == "1"
+            case option
+            when "1"
                 Thread.new{
                     puts "\rSearch:"
                     search = gets.chomp
@@ -33,8 +34,7 @@ print help
                         puts "\r[!] Address found: #{host["ip_str"]}"
                     end
                 }.join
-            end
-            if option == "2"
+            when "2"
                 Thread.new{
                     puts "\rSearch:"
                     inputt = gets.chomp
@@ -47,8 +47,7 @@ print help
                         puts result["facets"]
                     end
                 }.join
-            end
-            if option == "3"
+            when "3"
                 Thread.new{
                     puts "\rAddress:"
                     inputtt = gets.chomp
@@ -56,13 +55,12 @@ print help
                     print output.to_s
                     puts "\n"
                 }.join
-            end
-            if option == "4"
+            when "4"
                 puts "\rHere the API key:\n"
                 puts "#{key}\n"
-            elsif option == "5"
+            when "5"
                 print help
-            elsif option == "6"
+            when "6"
                 puts "[+] Thanks for using!\n"
                 break
             end
