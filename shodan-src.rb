@@ -2,14 +2,15 @@ require 'shodan'
 
 def main
 
-    key = "8lqVcIuzOahr1eJoD1fBBpWTBu0vAisG"
+    key = "tbnPsiZDGrf3DfcffjbLyCNPvx1qI7iI"
     user = Shodan::Shodan.new(key)   #My shodan api key
     
     puts """
 █▀ █░█ █▀█ █▀▄ ▄▀█ █▄░█
-▄█ █▀█ █▄█ █▄▀ █▀█ █░▀█  -By Lojacops   
+▄█ █▀█ █▄█ █▄▀ █▀█ █░▀█ 
 █▀█ █▀▀ █▀ █▀▀ ▄▀█ █▀█ █▀▀ █░█
 █▀▄ ██▄ ▄█ ██▄ █▀█ █▀▄ █▄▄ █▀█
+
 """
 help = """
 1) search results with only ip addresses
@@ -17,58 +18,47 @@ help = """
 3) get host infos by address 
 4) show the api key
 5) help (this)
-6) exit
+6) exit\n
 """
-print help
     begin
-        prompt = "\rOption:"
-        while (option = gets.chomp)
+        print help
+        while true
+            print "\rOption: "; option = gets.chomp
             case option
             when "1"
-                Thread.new{
-                    puts "\rSearch:"
-                    search = gets.chomp
-                    results = user.search("#{search}")
-
-                    results["matches"].each do |host|
-                        puts "\r[!] Address found: #{host["ip_str"]}"
-                    end
-                }.join
+                print "\rSearch: "; search = gets.chomp
+                results = user.search("#{search}")
+                results["matches"].each do |host|
+                    puts "\r[!] Address found: #{host["ip_str"]}"
+                end
             when "2"
-                Thread.new{
-                    puts "\rSearch:"
-                    inputt = gets.chomp
-
-                    result = user.count("#{inputt}", :facets => 'org:10')
-                    puts "[!]Total number of results: #{result['total']}"
-                    puts "[!]Maximum output: 10\n"
-                    result.each do |outputt|
-                        puts "\nOutput:"
-                        puts result["facets"]
+                print "\rSearch: "; inputt = gets.chomp
+                result = user.search("#{inputt}", :facets => "org:10")
+                puts "[!]Total number of results: #{result["total"]}"
+                a = 0
+                result["matches"].each do |sex|
+                    a +=1
+                    puts "\nOutput:"
+                    puts "#{sex}".gsub(",",",\n")
+                    if a >= 10
+                        break
                     end
-                }.join
+                end
             when "3"
-                Thread.new{
-                    puts "\rAddress:"
-                    inputtt = gets.chomp
-                    output = user.host("#{inputtt}")
-                    print output.to_s
-                    puts "\n"
-                }.join
+                print "\rAddress:"; inputtt = gets.chomp
+                output = user.host("#{inputtt}")
+                print output.to_s + "\n"
             when "4"
-                puts "\rHere the API key:\n"
-                puts "#{key}\n"
+                puts "\rHere the API key:\n#{key}\n"
             when "5"
                 print help
             when "6"
                 puts "[+] Thanks for using!\n"
-                break
+                break; exit
             end
-        system(option)
-        print prompt
         end
     rescue => e
-        puts "[+] ERROR"
+        puts "[+] ERROR\n#{e}"
     end
 end
 
