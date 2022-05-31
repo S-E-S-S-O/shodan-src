@@ -1,5 +1,5 @@
 # shodan-src
-Just a normal shodan device-researcher
+Just a normal shodan device-researcher with shodan API.
 
 # Getting started
 
@@ -17,4 +17,4 @@ Here the commands:
 5) help (this)
 6) exit
 ```
-Yes, I also gave you my API key :D
+
