@@ -18,3 +18,4 @@ Here the commands:
 6) exit
 ```
 
+credits: **[komodoooo](https://github.com/komodoooo)**
